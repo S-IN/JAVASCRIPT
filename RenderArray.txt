@@ -34,11 +34,11 @@
  
         //Get each data only one time and one after the other in one single array 
         var AnotherArray = []
-        var len = Math.min(PADAWAN.length,THANOS.length,AFunArray.length, SO_MANY_VAR.length)
+        var len = Math.min(PADAWAN.length,THANOS.length,AFunArray.length, BATMAN.length)
 
         //Push your datas and give them keys
         for(i=0;i<len;i++)
-        AnotherArray.push({lilpadawan: PADAWAN[i],lilthanos: THANOS[i], lilarray: YODA[i], lilvar: BATMAN[i]}); 
+        AnotherArray.push({lilpadawan: PADAWAN[i],lilthanos: THANOS[i], lilyoda: YODA[i], lilbatman: BATMAN[i]}); 
         
         this.setState({dataSource: AnotherArray, isLoading: false})        
         } 
