@@ -1,0 +1,58 @@
+  constructor() {super()this.state = { dataSource : []} }
+  
+  componentDidMount() {
+    StatusBar.setHidden(true);
+
+    fetch('YOUR HTTPS ADRESS', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        query: {
+          bool: {
+            filter: [{ term: { YOUR TERM: true } }],
+          },
+        },
+        size: 1000,
+      }),
+    })
+    .then(response => response.json())
+    .then(json => {       
+        if (json.hits.total !== null) { 
+        
+        // Extract your datas from ElasticSearch
+        var PADAWAN = json.hits.hits.reduce((accumulator, currentValue) => accumulator = [currentValue._source.YOUR PARAMETER.toString().toUpperCase(), ...accumulator], []) 
+        
+        var THANOS = json.hits.hits.reduce((accumulator, currentValue) => accumulator = [currentValue._source.YOUR PARAMETER, ...accumulator], []) 
+
+        var YODA = json.hits.hits.reduce((accumulator, currentValue) => accumulator = [currentValue._source.YOUR PARAMETER, ...accumulator], [])    
+       
+        //Example if you have to replace a symbol by " "
+        var BATMAN = json.hits.hits.reduce((accumulator, currentValue) => accumulator = [currentValue._source.YOUR PARAMETER.toString().replace(/<p>|<\/p>/g,''), ...accumulator], [])
+ 
+        //Get each data only one time and one after the other in one single array 
+        var AnotherArray = []
+        var len = Math.min(PADAWAN.length,THANOS.length,AFunArray.length, SO_MANY_VAR.length)
+
+        //Push your datas and give them keys
+        for(i=0;i<len;i++)
+        AnotherArray.push({lilpadawan: PADAWAN[i],lilthanos: THANOS[i], lilarray: YODA[i], lilvar: BATMAN[i]}); 
+        
+        this.setState({dataSource: AnotherArray, isLoading: false})        
+        } 
+        else {
+          console.log('JSON not found, loading');          
+          this.setState({ browserOpen: true });
+          WebBrowser.openBrowserAsync(`YOUR DEFAULT ADRESS`)
+          .then(() => {
+                WebBrowser.dismissBrowser();
+                this.setState({ browserOpen: false }); 
+            });          
+        }
+      })  
+      .catch(err => {
+        console.error('Error : ' + err); 
+      });
+  };
